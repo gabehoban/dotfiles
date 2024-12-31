@@ -6,4 +6,6 @@ My dotfiles managed by chezmoi
 
 ```sh
 chezmoi init git@github.com:gabehoban/dotfiles.git
+
+chezmoi apply -v
 ```
