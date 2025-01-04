@@ -1,0 +1,7 @@
+#!{{ lookPath "bash" }}
+
+# Install nano syntax highlighting
+if [ ! -d ~/.config/nano/syntax ]; then
+    mkdir -p ~/.config/nano/syntax
+    git clone https://github.com/scopatz/nanorc.git ~/.config/nano/syntax
+fi

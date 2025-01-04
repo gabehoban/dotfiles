@@ -1,6 +1,6 @@
-{{- if eq .chezmoi.os "linux" -}}
+#!{{ lookPath "bash" }}
 
-#! /usr/bin/env bash
+{{- if eq .chezmoi.os "linux" -}}
 
 set -euo pipefail
 
