@@ -1,0 +1,11 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+#: Install GNOME Shell Extensions
+
+xargs gext install <{{ joinPath .chezmoi.sourceDir ".pkgs-gnome" "extensions" (lower .hostname) | quote }}
+
+{{- end -}}

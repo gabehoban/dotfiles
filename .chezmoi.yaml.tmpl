@@ -1,9 +1,12 @@
-{{- $personal := false -}}{{/* true if this is a personal machine */}}
-
-{{- $personal = promptBool "personal" -}}
+{{- $hostname := .chezmoi.hostname -}}
+{{/* Work around unreliable hostname on darwin */}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-     $computerName := output "scutil" "--get" "ComputerName" | trim -}}
+{{-     $hostname := $computerName -}}
+{{- end -}}
 
 format: yaml
+sourceDir: "~/.local/dotfiles"
 
 data:
-  name: "Gabriel Hoban"
-  personal: {{ $personal | quote }}
+  hostname = {{ $codename | quote }}

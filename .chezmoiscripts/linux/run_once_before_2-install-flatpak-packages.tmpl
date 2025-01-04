@@ -1,0 +1,14 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+#: Add the Flathub repository
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+#: Install Flatpak apps
+
+xargs flatpak install -y flathub <{{ joinPath .chezmoi.sourceDir ".pkgs-flatpak" (lower .hostname) | quote }}
+
+{{- end -}}

@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#! /usr/bin/env bash
+
+set -euo pipefail
+
+dconf load / <{{ joinPath .chezmoi.sourceDir ".pkgs-gnome" "settings" (lower .hostname) | quote }}
+
+{{- end -}}
