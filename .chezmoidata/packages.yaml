@@ -7,7 +7,6 @@ packages:
       - "atuin"
       - "bat"
       - "chezmoi"
-      - "clamav"
       - "cowsay"
       - "git"
       - "fish"
