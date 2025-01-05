@@ -1,3 +1,10 @@
 .github
 LICENSE
 README.md
+
+{{ if ne .chezmoi.os "darwin" }}
+.config//Code/User/settings.json
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+.var/app/com.visualstudio.code/config/Code/User/settings.json
+{{ end }}

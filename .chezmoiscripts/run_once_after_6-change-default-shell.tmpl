@@ -2,16 +2,9 @@
 
 echo "Changing shell to fish."
 
-{{- if eq .chezmoi.os "linux" -}}
-FISH_PATH=/home/linuxbrew/.linuxbrew/bin/fish
-{{- end -}}
+[ -f /home/linuxbrew/.linuxbrew/bin/fish ] && FISH_PATH=/home/linuxbrew/.linuxbrew/bin/fish
+[ -f /opt/homebrew/bin/fish ] && FISH_PATH=/opt/homebrew/bin/fish
 
-{{- if eq .chezmoi.os "darwin" -}}
-FISH_PATH=/opt/homebrew/bin/fish
-{{- end -}}
-
-if ! grep -q $FISH_PATH /etc/shells; then
-  echo $FISH_PATH | sudo tee -a /etc/shells
-fi
+grep -q $FISH_PATH /etc/shells || ( echo $FISH_PATH | sudo tee -a /etc/shells )
 
 chsh -s $FISH_PATH gabehoban

@@ -23,6 +23,10 @@ packages:
       - "viddy"
       - "xdg-ninja"
       - "zoxide"
+    vscode:
+      - "antfu.icons-carbon"
+      - "Catppuccin.catppuccin-vsc"
+      - "Catppuccin.catppuccin-vsc-icons"
   linux:
     taps:
       - "homebrew/linux-fonts"
@@ -38,6 +42,8 @@ packages:
       - "gnome-shell-extension-dash-to-dock"
       - "gnome-shell-extension-dash-to-dock"
       - "gnome-shell-extension-user-theme"
+      - "kernel-devel"
+      - "kernel-modules"
       - "podman"
       - "xdg-user-dirs-gtk"
       - "xdg-utils"
@@ -47,10 +53,9 @@ packages:
       - "com.github.tchx84.Flatseal"
       - "com.hunterwittenborn.Celeste"
       - "com.mikrotik.WinBox"
+      - "com.visualstudio.code"
       - "com.valvesoftware.Steam"
       - "dev.geopjr.Collision"
       - "io.gitlab.news_flash.NewsFlash"
       - "io.mpv.Mpv"
       - "org.mozilla.firefox"
-      - "org.mozilla.Thunderbird"
-      - "org.raspberrypi.rpi-imager"

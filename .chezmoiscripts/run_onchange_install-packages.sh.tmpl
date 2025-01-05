@@ -48,8 +48,7 @@ cat <<EOF | xargs sudo dnf install -q -y
 {{ . | quote }}
 {{ end -}}
 EOF
-sudo dnf remove -y remmina firefox libreoffice
-
+sudo dnf remove -q -y remmina firefox libreoffice
 
 flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 cat <<EOF | xargs flatpak install --or-update --noninteractive --user flathub
@@ -57,5 +56,9 @@ cat <<EOF | xargs flatpak install --or-update --noninteractive --user flathub
 {{ . | quote }}
 {{ end -}}
 EOF
+{{ range .packages.common.vscode -}}
+flatpak --user run com.visualstudio.code --force --install-extension {{ . | quote }} 2>/dev/null
+{{ end -}}
+
 flatpak override --user --filesystem=/games com.valvesoftware.Steam
 {{ end -}}
