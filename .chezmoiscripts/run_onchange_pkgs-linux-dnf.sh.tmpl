@@ -1,0 +1,14 @@
+#!{{ lookPath "bash" }}
+
+{{ if eq .chezmoi.os "linux" -}}
+
+set -euo pipefail
+
+cat <<EOF | xargs sudo dnf install -q -y
+{{ range .packages.linux.dnf -}}
+{{ . | quote }}
+{{ end -}}
+EOF
+sudo dnf remove -q -y remmina firefox libreoffice 2>/dev/null
+
+{{ end -}}

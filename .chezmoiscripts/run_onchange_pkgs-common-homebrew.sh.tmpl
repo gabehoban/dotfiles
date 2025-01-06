@@ -1,0 +1,42 @@
+#!{{ lookPath "bash" }}
+
+set -euo pipefail
+
+[ -d /opt/homebrew ] && HOMEBREW_PREFIX="/opt/homebrew"
+[ -d /home/linuxbrew/.linuxbrew ] && HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+
+if [ -z $HOMEBREW_PREFIX ]; then
+  echo "Please install homebrew before running."
+  exit 1
+fi
+
+$HOMEBREW_PREFIX/bin/brew bundle --no-lock -q --file=/dev/stdin <<EOF
+# Common Homebrew
+{{ range .packages.common.taps }}
+tap {{ . | quote }}
+{{ end }}
+{{ range .packages.common.brews }}
+brew {{ . | quote }}
+{{ end }}
+# Linux Specific
+{{ if eq .chezmoi.os "linux" -}}
+{{ range .packages.linux.taps }}
+tap {{ . | quote }}
+{{ end }}
+{{ range .packages.linux.brews }}
+brew {{ . | quote }}
+{{ end }}
+{{ end -}}
+# Darwin Specific
+{{ if eq .chezmoi.os "darwin" -}}
+{{ range .packages.darwin.taps }}
+tap {{ . | quote }}
+{{ end }}
+{{ range .packages.darwin.casks }}
+cask {{ . | quote }}
+{{ end }}
+{{ range .packages.darwin.brews }}
+cask {{ . | quote }}
+{{ end }}
+{{ end -}}
+EOF

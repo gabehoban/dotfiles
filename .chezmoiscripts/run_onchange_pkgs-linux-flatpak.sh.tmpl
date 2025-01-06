@@ -1,0 +1,18 @@
+#!{{ lookPath "bash" }}
+
+{{ if eq .chezmoi.os "linux" -}}
+
+set -euo pipefail
+
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+cat <<EOF | xargs flatpak install --or-update --noninteractive --user flathub
+{{ range .packages.linux.flatpaks -}}
+{{ . | quote }}
+{{ end -}}
+EOF
+{{ range .packages.common.vscode -}}
+flatpak --user run com.visualstudio.code --force --install-extension {{ . | quote }} 2>/dev/null
+{{ end -}}
+flatpak override --user --filesystem=/games com.valvesoftware.Steam
+
+{{ end -}}
